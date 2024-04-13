@@ -18,6 +18,10 @@ public class QuackField : MonoBehaviour
     void Update()
     {
         var scale = GetCurrentVolume() * 10;
+
+        if (scale < 1)
+            scale = 0;
+        
         transform.localScale = new Vector3(scale, scale, 1);
     }
 
