@@ -34,9 +34,11 @@ public class QuackField : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.name.StartsWith("Duckling"))
+        var duckling = other.GetComponent<DucklingMovement>();
+
+        if (duckling == null)
             return;
         
-        other.GetComponent<DucklingMovement>().OnQuack();
+        duckling.OnQuack();
     }
 }
