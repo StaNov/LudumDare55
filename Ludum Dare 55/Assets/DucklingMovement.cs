@@ -9,22 +9,24 @@ public class DucklingMovement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private GameObject _dadDuck;
     private float _speedMultiplier = 1;
+    private float _angularSpeed;
     
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.SetRotation(Random.Range(0f, 360f));
         _dadDuck = GameObject.Find("Duck");
+        _angularSpeed = Random.Range(-1f, 1f);
     }
 
     void FixedUpdate()
     {
         _rigidbody.velocity = Vector2.zero;
         _rigidbody.angularVelocity = 0;
-        _rigidbody.SetRotation(_rigidbody.rotation + 1);
+        _rigidbody.SetRotation(_rigidbody.rotation + _angularSpeed);
         _rigidbody.MovePosition(_rigidbody.position + Time.fixedDeltaTime * _speedMultiplier * new Vector2(transform.up.x, transform.up.y));
 
-        _speedMultiplier = Mathf.Lerp(_speedMultiplier, 1, 0.01f);
+        _speedMultiplier = Mathf.Lerp(_speedMultiplier, _MinSpeed, 0.02f);
     }
 
     public void OnQuack(float intensity)

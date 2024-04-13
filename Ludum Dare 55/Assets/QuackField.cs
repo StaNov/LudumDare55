@@ -1,14 +1,16 @@
 using System;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuackField : MonoBehaviour
 {
     private const int BUFFER = 128;
     private const int DEVICE = 0;
+    private const int QUACK_SCALE = 10;
     private AudioClip _audioClip;
     private float[] _samples = new float[BUFFER];
-    private float _maxVolume;
+    private float _maxVolume = 0.01f;
     
     void Awake()
     {
@@ -17,10 +19,12 @@ public class QuackField : MonoBehaviour
 
     void Update()
     {
-        var scale = GetCurrentVolume() * 10;
+        var scale = GetCurrentVolume() * QUACK_SCALE;
 
-        if (scale < 1)
+        if (scale < QUACK_SCALE / 8f)
             scale = 0;
+
+        scale = Math.Max(scale, Mathf.Lerp(transform.localScale.x, 0, 0.05f));
         
         transform.localScale = new Vector3(scale, scale, 1);
     }
