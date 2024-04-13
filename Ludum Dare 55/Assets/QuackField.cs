@@ -19,26 +19,31 @@ public class QuackField : MonoBehaviour
 
     void Update()
     {
-        var position = Microphone.GetPosition(Microphone.devices[DEVICE]) - BUFFER;
-        if (position < 0)
-        {
-            return;
-        }
-        _audioClip.GetData(_samples, position);
-        var currentVolume = _samples.Max();
-        _maxVolume = Math.Max(_maxVolume, currentVolume);
-        var realVolume = currentVolume / _maxVolume;
+        var realVolume = GetCurrentVolume();
         var scale = realVolume * 10;
         transform.localScale = new Vector3(scale, scale, 1);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         var duckling = other.GetComponent<DucklingMovement>();
 
         if (duckling == null)
             return;
         
-        duckling.OnQuack();
+        duckling.OnQuack(GetCurrentVolume());
+    }
+
+    private float GetCurrentVolume()
+    {
+        var position = Microphone.GetPosition(Microphone.devices[DEVICE]) - BUFFER;
+        if (position < 0)
+        {
+            return 0;
+        }
+        _audioClip.GetData(_samples, position);
+        var currentVolume = _samples.Max();
+        _maxVolume = Math.Max(_maxVolume, currentVolume);
+        return currentVolume / _maxVolume;
     }
 }
