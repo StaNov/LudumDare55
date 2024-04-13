@@ -9,10 +9,12 @@ public class QuackField : MonoBehaviour
     private AudioClip _audioClip;
     private float[] _samples = new float[BUFFER];
     private float _maxVolume;
+    private Rigidbody2D _rigidbody2D;
     
     void Awake()
     {
         _audioClip = Microphone.Start(Microphone.devices[DEVICE], true, 10, 5000);
+        _rigidbody2D = GetComponentInParent<Rigidbody2D>();
     }
 
     void Update()
@@ -28,5 +30,15 @@ public class QuackField : MonoBehaviour
         var realVolume = currentVolume / _maxVolume;
         var scale = realVolume * 10;
         transform.localScale = new Vector3(scale, scale, 1);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (!other.name.StartsWith("Duckling"))
+            return;
+
+        var otherRigidBody = other.GetComponent<Rigidbody2D>();
+        var rotation = _rigidbody2D.transform.position - otherRigidBody.transform.position;
+        otherRigidBody.SetRotation(Quaternion.LookRotation (Vector3.forward, rotation.normalized));
     }
 }
