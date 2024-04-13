@@ -15,26 +15,22 @@ public class DuckMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        var position = _rigidbody.position;
+        Vector2 direction = Vector2.zero;
         
         if (Input.GetKey(KeyCode.W))
-        {
-            position += Vector2.up * Time.fixedDeltaTime;
-        }
+            direction += Vector2.up;
         
         if (Input.GetKey(KeyCode.S))
-        {
-            position += Vector2.down * Time.fixedDeltaTime;
-        }
+            direction += Vector2.down;
+        
         if (Input.GetKey(KeyCode.A))
-        {
-            position += Vector2.left * Time.fixedDeltaTime;
-        }
+            direction += Vector2.left;
         
         if (Input.GetKey(KeyCode.D))
-        {
-            position += Vector2.right * Time.fixedDeltaTime;
-        }
+            direction += Vector2.right;
+        
+        var position = _rigidbody.position;
+        position += Time.fixedDeltaTime * 2 * direction;
         _rigidbody.MovePosition(position);
     }
 }
