@@ -20,7 +20,7 @@ public class CarMovement : MonoBehaviour
         while (true)
         {
             transform.position = _initPosition;
-            _rigidbody.velocity = Vector2.right * Random.Range(5, 7) * (rightToLeft ? -1 : 1);
+            _rigidbody.velocity = Vector2.right * Random.Range(8, 11) * (rightToLeft ? -1 : 1);
 
             while (Mathf.Abs(transform.position.x) < 13)
                 yield return null;

@@ -31,6 +31,9 @@ public class DucklingMovement : MonoBehaviour
 
     public void OnQuack(float intensity)
     {
+        if (!enabled)
+            return;
+        
         var rotation = _dadDuck.transform.position - _rigidbody.transform.position;
         _rigidbody.SetRotation(Quaternion.LookRotation (Vector3.forward, rotation.normalized));
         _currentSpeed = Math.Max(_currentSpeed, (_MaxSpeed - _MinSpeed) * intensity + _MinSpeed);

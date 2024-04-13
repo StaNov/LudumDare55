@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6195133598711097944}
   - component: {fileID: 7186666832828887674}
   - component: {fileID: -2831352665418399516}
+  - component: {fileID: -8702412735020349246}
   m_Layer: 0
   m_Name: Duckling
   m_TagString: Untagged
@@ -187,3 +188,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf079e316d07264f827447f690e8b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8702412735020349246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329311857778021847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976ea09bb8a00794393e800e4c1c0d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splashSprite: {fileID: 21300000, guid: 171c0f0215c35914183126d1912e865f, type: 3}
