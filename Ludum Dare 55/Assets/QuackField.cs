@@ -32,13 +32,11 @@ public class QuackField : MonoBehaviour
         transform.localScale = new Vector3(scale, scale, 1);
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.name.StartsWith("Duckling"))
             return;
-
-        var otherRigidBody = other.GetComponent<Rigidbody2D>();
-        var rotation = _rigidbody2D.transform.position - otherRigidBody.transform.position;
-        otherRigidBody.SetRotation(Quaternion.LookRotation (Vector3.forward, rotation.normalized));
+        
+        other.GetComponent<DucklingMovement>().OnQuack();
     }
 }
