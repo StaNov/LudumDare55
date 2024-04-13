@@ -8,6 +8,7 @@ public class DucklingMovement : MonoBehaviour
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.SetRotation(Random.Range(0f, 360f));
     }
 
     // Update is called once per frame
