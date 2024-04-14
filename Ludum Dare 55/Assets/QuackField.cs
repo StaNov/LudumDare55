@@ -25,7 +25,7 @@ public class QuackField : MonoBehaviour
         if (scale < QUACK_SCALE / 8f)
             scale = 0;
 
-        scale = Math.Max(scale, Mathf.Lerp(transform.localScale.x, 0, 0.025f));
+        scale = Math.Max(scale, Mathf.Lerp(transform.localScale.x, 0, Time.deltaTime * 10f));
         
         transform.localScale = new Vector3(scale, scale, 1);
     }
@@ -37,7 +37,11 @@ public class QuackField : MonoBehaviour
         if (duckling == null)
             return;
         
+        #if UNITY_WEBGL
+        duckling.OnQuack(1);
+        #else
         duckling.OnQuack(GetCurrentVolume());
+        #endif
     }
 
     private float GetCurrentVolume()
