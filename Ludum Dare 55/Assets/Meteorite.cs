@@ -6,42 +6,43 @@ using Random = UnityEngine.Random;
 
 public class Meteorite : MonoBehaviour
 {
-    public Sprite meteoriteSprite;
-    private Sprite emptySprite;
     private float shadowEnlargingTime;
     private const float meteoriteDespawnTime = 0.2f;
-    private SpriteRenderer _renderer;
+    private SpriteRenderer _shadowRenderer;
+    private SpriteRenderer _meteoriteRenderer;
     private CircleCollider2D _collider;
 
     private List<GameObject> currentlyColliding = new();
     
     IEnumerator Start()
     {
-        _renderer = GetComponent<SpriteRenderer>();
-        _collider = GetComponent<CircleCollider2D>();
-        transform.Rotate(0, 0, Random.Range(0f, 366f));
-        emptySprite = _renderer.sprite;
-        shadowEnlargingTime = Random.Range(2f, 4f);
-        var originalSpriteColor = _renderer.color;
+        _shadowRenderer = transform.Find("Shadow").GetComponent<SpriteRenderer>();
+        _meteoriteRenderer = transform.Find("FlyingMeteorite").GetComponent<SpriteRenderer>();
+        _collider = _shadowRenderer.GetComponent<CircleCollider2D>();
+        _meteoriteRenderer.transform.Rotate(0, 0, Random.Range(0f, 366f));
+        shadowEnlargingTime = Random.Range(1.5f, 2.5f);
         var loopStartTime = 0f;
 
         while (true)
         {
-            SetScale(0);
+            SetShadowScale(0);
             loopStartTime = loopStartTime != 0 ? Time.time : Time.time - Random.Range(0, shadowEnlargingTime);
-            _renderer.sprite = emptySprite;
-            _renderer.color = originalSpriteColor;
+            _meteoriteRenderer.color = Color.white;
+            SetMeteoriteRendererLocalPosition(20);
             _collider.isTrigger = true;
 
             while (Time.time - loopStartTime < shadowEnlargingTime)
             {
                 var scale = (Time.time - loopStartTime) / shadowEnlargingTime;
-                SetScale(scale * scale);
+                SetShadowScale(scale * scale);
                 yield return null;
             }
 
-            _renderer.sprite = meteoriteSprite;
-            _renderer.color = Color.white;
+            while (_meteoriteRenderer.transform.localPosition.x > 0)
+            {
+                SetMeteoriteRendererLocalPosition(_meteoriteRenderer.transform.localPosition.x - 0.5f);
+                yield return null;
+            }
 
             foreach (var colliding in new List<GameObject>(currentlyColliding))
             {
@@ -55,31 +56,39 @@ public class Meteorite : MonoBehaviour
 
             _collider.isTrigger = false;
             
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
 
             var meteoriteDespawnStartTime = Time.time;
 
             while (Time.time - meteoriteDespawnStartTime < meteoriteDespawnTime)
             {
-                SetAlpha(1 - (Time.time - meteoriteDespawnStartTime) / meteoriteDespawnTime);
+                SetMeteoriteAlpha(1 - (Time.time - meteoriteDespawnStartTime) / meteoriteDespawnTime);
                 yield return null;
             }
         }
     }
 
-    private void SetAlpha(float alpha)
+    private void SetMeteoriteAlpha(float alpha)
     {
-        var rendererColor = _renderer.color;
+        var rendererColor = _meteoriteRenderer.color;
         rendererColor.a = alpha;
-        _renderer.color = rendererColor;
+        _meteoriteRenderer.color = rendererColor;
     }
 
-    private void SetScale(float scale)
+    private void SetShadowScale(float scale)
     {
-        var newScale = transform.localScale;
+        var newScale = _shadowRenderer.transform.localScale;
         newScale.x = scale;
         newScale.y = scale;
-        transform.localScale = newScale;
+        _shadowRenderer.transform.localScale = newScale;
+    }
+
+    private void SetMeteoriteRendererLocalPosition(float position)
+    {
+        var newPosition = _meteoriteRenderer.transform.localPosition;
+        newPosition.x = position;
+        newPosition.y = position;
+        _meteoriteRenderer.transform.localPosition = newPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
