@@ -19,6 +19,7 @@ public class Meteorite : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<CircleCollider2D>();
+        transform.Rotate(0, 0, Random.Range(0f, 366f));
         emptySprite = _renderer.sprite;
         shadowEnlargingTime = Random.Range(2f, 4f);
         var originalSpriteColor = _renderer.color;
