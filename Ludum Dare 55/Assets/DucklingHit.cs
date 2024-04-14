@@ -24,14 +24,11 @@ public class DucklingHit : MonoBehaviour
         if (ducklingMovement != null)
             ducklingMovement.enabled = false;
         
-        var quackField = GetComponentInChildren<QuackField>();
-        if (quackField != null)
-            quackField.enabled = false;
-        
         var duckMovement = GetComponent<DuckMovement>();
         if (duckMovement != null)
         {
             duckMovement.enabled = false;
+            GameObject.Find("QuackField").SetActive(false);
             _musicPlayer.PlayLoss();
         }
 

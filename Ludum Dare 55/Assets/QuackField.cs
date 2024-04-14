@@ -10,17 +10,20 @@ public class QuackField : MonoBehaviour
     private AudioClip _audioClip;
     private float[] _samples = new float[BUFFER];
     private float _maxVolume = 0.01f;
+    private Transform _duck;
     
     void Awake()
     {
         #if !UNITY_WEBGL
         _audioClip = Microphone.Start(Microphone.devices[DEVICE], true, 10, 5000);
         #endif
+        _duck = GameObject.Find("Duck").transform;
         transform.localScale = Vector3.zero;
     }
 
     void Update()
     {
+        transform.position = _duck.position;
         var scale = GetCurrentVolume() * QUACK_SCALE;
 
         if (scale < QUACK_SCALE / 8f)
