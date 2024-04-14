@@ -5,13 +5,16 @@ using UnityEngine;
 public class CarMovement : MonoBehaviour
 {
     public bool rightToLeft;
+    public Sprite[] carSprites;
     
     private Rigidbody2D _rigidbody;
+    private SpriteRenderer _renderer;
     private Vector3 _initPosition;
     
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _renderer = GetComponent<SpriteRenderer>();
         _initPosition = transform.position;
     }
     
@@ -19,6 +22,7 @@ public class CarMovement : MonoBehaviour
     {
         while (true)
         {
+            _renderer.sprite = carSprites[Random.Range(0, carSprites.Length)];
             transform.position = _initPosition;
             _rigidbody.velocity = Vector2.right * Random.Range(8, 11) * (rightToLeft ? -1 : 1);
 
