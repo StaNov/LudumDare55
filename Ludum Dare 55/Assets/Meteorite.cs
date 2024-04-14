@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class Meteorite : MonoBehaviour
 {
+    public Sprite flyingSprite;
+    
     private float shadowEnlargingTime;
     private const float meteoriteDespawnTime = 0.2f;
     private SpriteRenderer _shadowRenderer;
@@ -19,9 +21,10 @@ public class Meteorite : MonoBehaviour
         _shadowRenderer = transform.Find("Shadow").GetComponent<SpriteRenderer>();
         _meteoriteRenderer = transform.Find("FlyingMeteorite").GetComponent<SpriteRenderer>();
         _collider = _shadowRenderer.GetComponent<CircleCollider2D>();
-        shadowEnlargingTime = Random.Range(1.5f, 2.5f);
+        shadowEnlargingTime = Random.Range(1f, 2f);
         var loopStartTime = 0f;
         var basePosition = _meteoriteRenderer.transform.localPosition;
+        var groundSprite = _meteoriteRenderer.sprite;
 
         while (true)
         {
@@ -29,6 +32,7 @@ public class Meteorite : MonoBehaviour
             loopStartTime = loopStartTime != 0 ? Time.time : Time.time - Random.Range(0, shadowEnlargingTime);
             _meteoriteRenderer.color = Color.white;
             SetMeteoriteRendererLocalPosition(basePosition.x + 20);
+            _meteoriteRenderer.sprite = flyingSprite;
             _collider.isTrigger = true;
 
             while (Time.time - loopStartTime < shadowEnlargingTime)
@@ -45,6 +49,7 @@ public class Meteorite : MonoBehaviour
             }
 
             _meteoriteRenderer.transform.localPosition = basePosition;
+            _meteoriteRenderer.sprite = groundSprite;
 
             foreach (var colliding in new List<GameObject>(currentlyColliding))
             {
