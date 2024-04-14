@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 76266939187346086}
   - component: {fileID: 6963695093965897826}
   - component: {fileID: 1849998718487234193}
+  - component: {fileID: -2914566547140184908}
   m_Layer: 0
   m_Name: Duck
   m_TagString: Untagged
@@ -162,6 +163,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2914566547140184908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593744821114812397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1041447ca181872418bc685b6358ac51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: c5548c3d3937bf54380e37575e12f8fb, type: 3}
+  - {fileID: 21300000, guid: c88b05fd8f851064ca43a9161ae1c673, type: 3}
+  - {fileID: 21300000, guid: c5548c3d3937bf54380e37575e12f8fb, type: 3}
+  - {fileID: 21300000, guid: 086b7385f6686cf4c891344961038bbd, type: 3}
 --- !u!1 &2496932922255459237
 GameObject:
   m_ObjectHideFlags: 0

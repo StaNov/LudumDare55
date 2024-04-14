@@ -20,6 +20,6 @@ public class DucklingFlow : MonoBehaviour
         _rigidbody.isKinematic = true;
         _rigidbody.velocity = Vector2.left * Random.Range(3, 8);
         _rigidbody.freezeRotation = false;
-        _rigidbody.angularVelocity = Random.Range(120, 180);
+        _rigidbody.angularVelocity = Random.Range(180, 360) * (Random.Range(0, 2) == 0 ? 1 : -1);
     }
 }
