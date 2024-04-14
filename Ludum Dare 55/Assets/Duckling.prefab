@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7186666832828887674}
   - component: {fileID: -2831352665418399516}
   - component: {fileID: -8702412735020349246}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Duckling
   m_TagString: Untagged
   m_Icon: {fileID: 0}

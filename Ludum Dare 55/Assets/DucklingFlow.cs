@@ -5,9 +5,12 @@ using UnityEngine;
 public class DucklingFlow : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
+    private MusicPlayer _musicPlayer;
+    
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _musicPlayer = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
     }
 
     public void OnDucklingFlow()
@@ -20,6 +23,7 @@ public class DucklingFlow : MonoBehaviour
         var duckMovement = GetComponent<DuckMovement>();
         if (duckMovement != null)
         {
+            _musicPlayer.PlayLoss();
             duckMovement.enabled = false;
         }
 
