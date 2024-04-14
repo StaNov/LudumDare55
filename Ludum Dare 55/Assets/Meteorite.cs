@@ -19,16 +19,16 @@ public class Meteorite : MonoBehaviour
         _shadowRenderer = transform.Find("Shadow").GetComponent<SpriteRenderer>();
         _meteoriteRenderer = transform.Find("FlyingMeteorite").GetComponent<SpriteRenderer>();
         _collider = _shadowRenderer.GetComponent<CircleCollider2D>();
-        _meteoriteRenderer.transform.Rotate(0, 0, Random.Range(0f, 366f));
         shadowEnlargingTime = Random.Range(1.5f, 2.5f);
         var loopStartTime = 0f;
+        var basePosition = _meteoriteRenderer.transform.localPosition;
 
         while (true)
         {
             SetShadowScale(0);
             loopStartTime = loopStartTime != 0 ? Time.time : Time.time - Random.Range(0, shadowEnlargingTime);
             _meteoriteRenderer.color = Color.white;
-            SetMeteoriteRendererLocalPosition(20);
+            SetMeteoriteRendererLocalPosition(basePosition.x + 20);
             _collider.isTrigger = true;
 
             while (Time.time - loopStartTime < shadowEnlargingTime)
@@ -38,11 +38,13 @@ public class Meteorite : MonoBehaviour
                 yield return null;
             }
 
-            while (_meteoriteRenderer.transform.localPosition.x > 0)
+            while (_meteoriteRenderer.transform.localPosition.x > basePosition.x + 0.5f)
             {
                 SetMeteoriteRendererLocalPosition(_meteoriteRenderer.transform.localPosition.x - 0.5f);
                 yield return null;
             }
+
+            _meteoriteRenderer.transform.localPosition = basePosition;
 
             foreach (var colliding in new List<GameObject>(currentlyColliding))
             {
