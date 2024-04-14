@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuackField : MonoBehaviour
@@ -14,7 +13,9 @@ public class QuackField : MonoBehaviour
     
     void Awake()
     {
+        #if !UNITY_WEBGL
         _audioClip = Microphone.Start(Microphone.devices[DEVICE], true, 10, 5000);
+        #endif
     }
 
     void Update()
@@ -24,7 +25,7 @@ public class QuackField : MonoBehaviour
         if (scale < QUACK_SCALE / 8f)
             scale = 0;
 
-        scale = Math.Max(scale, Mathf.Lerp(transform.localScale.x, 0, 0.05f));
+        scale = Math.Max(scale, Mathf.Lerp(transform.localScale.x, 0, 0.025f));
         
         transform.localScale = new Vector3(scale, scale, 1);
     }
@@ -41,6 +42,9 @@ public class QuackField : MonoBehaviour
 
     private float GetCurrentVolume()
     {
+        #if UNITY_WEBGL
+        return Input.GetKeyDown(KeyCode.Space) ? 1f : 0f;
+        #else
         var position = Microphone.GetPosition(Microphone.devices[DEVICE]) - BUFFER;
         if (position < 0)
         {
@@ -50,5 +54,6 @@ public class QuackField : MonoBehaviour
         var currentVolume = _samples.Max();
         _maxVolume = Math.Max(_maxVolume, currentVolume);
         return currentVolume / _maxVolume;
+        #endif
     }
 }

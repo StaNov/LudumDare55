@@ -4459,8 +4459,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5.13, y: -3.9499998}
-  m_SizeDelta: {x: 614.3984, y: 199.4894}
+  m_AnchoredPosition: {x: 5.13, y: -3.4534}
+  m_SizeDelta: {x: 614.3984, y: 298.814}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &497156479
 PrefabInstance:
@@ -10995,7 +10995,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quack into the microphone <b>"XXX"</b> to summon the ducklings
+  m_Text: 'Quack into the microphone <b>"XXX"</b> to summon the ducklings.
+
+    Make
+    sure it has enough volume set.'
 --- !u!222 &1250346956
 CanvasRenderer:
   m_ObjectHideFlags: 0
