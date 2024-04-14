@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public float minHeight = int.MinValue;
     public float maxHeight = int.MaxValue;
-    
+    private float _minHeight;
+
     private Transform _dadDuck;
     void Awake()
     {
         _dadDuck = GameObject.Find("Duck").transform;
+        _minHeight = transform.position.y;
     }
 
     void FixedUpdate()
     {
-        var targetY = Mathf.Clamp(_dadDuck.position.y + 2, minHeight, maxHeight);
+        var targetY = Mathf.Clamp(_dadDuck.position.y + 2, _minHeight, maxHeight);
         var y = Mathf.Lerp(transform.position.y, targetY, 0.1f);
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
