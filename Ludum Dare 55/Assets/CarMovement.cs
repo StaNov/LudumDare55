@@ -24,7 +24,7 @@ public class CarMovement : MonoBehaviour
         {
             _renderer.sprite = carSprites[Random.Range(0, carSprites.Length)];
             transform.position = _initPosition;
-            _rigidbody.velocity = Vector2.right * Random.Range(8, 11) * (rightToLeft ? -1 : 1);
+            _rigidbody.velocity = Vector2.right * Random.Range(6, 9) * (rightToLeft ? -1 : 1);
 
             while (Mathf.Abs(transform.position.x) < 13)
                 yield return null;

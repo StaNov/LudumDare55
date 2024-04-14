@@ -38,7 +38,7 @@ public class QuackField : MonoBehaviour
             return;
         
         #if UNITY_WEBGL
-        duckling.OnQuack(1);
+        duckling.OnQuack(0.8f);
         #else
         duckling.OnQuack(GetCurrentVolume());
         #endif
@@ -57,7 +57,7 @@ public class QuackField : MonoBehaviour
         _audioClip.GetData(_samples, position);
         var currentVolume = _samples.Max();
         _maxVolume = Math.Max(_maxVolume, currentVolume);
-        return currentVolume / _maxVolume;
+        return Mathf.Min((currentVolume / _maxVolume) * 1.3f, 1f);
         #endif
     }
 }
