@@ -21,7 +21,7 @@ public class Meteorite : MonoBehaviour
         _shadowRenderer = transform.Find("Shadow").GetComponent<SpriteRenderer>();
         _meteoriteRenderer = transform.Find("FlyingMeteorite").GetComponent<SpriteRenderer>();
         _collider = _shadowRenderer.GetComponent<CircleCollider2D>();
-        shadowEnlargingTime = Random.Range(1f, 2f);
+        shadowEnlargingTime = Random.Range(1.5f, 2.5f);
         var loopStartTime = 0f;
         var basePosition = _meteoriteRenderer.transform.localPosition;
         var groundSprite = _meteoriteRenderer.sprite;
