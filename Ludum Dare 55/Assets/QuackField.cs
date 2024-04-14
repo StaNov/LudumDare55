@@ -16,6 +16,7 @@ public class QuackField : MonoBehaviour
         #if !UNITY_WEBGL
         _audioClip = Microphone.Start(Microphone.devices[DEVICE], true, 10, 5000);
         #endif
+        transform.localScale = Vector3.zero;
     }
 
     void Update()
@@ -57,7 +58,7 @@ public class QuackField : MonoBehaviour
         _audioClip.GetData(_samples, position);
         var currentVolume = _samples.Max();
         _maxVolume = Math.Max(_maxVolume, currentVolume);
-        return Mathf.Min((currentVolume / _maxVolume) * 1.3f, 1f);
+        return Mathf.Min(currentVolume / _maxVolume * 1.5f, 1f);
         #endif
     }
 }
