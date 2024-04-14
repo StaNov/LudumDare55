@@ -6,15 +6,18 @@ public class DuckMovement : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
     
-    // Start is called before the first frame update
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        var lastUpdatePosition = _rigidbody.position;
+        
+        _rigidbody.velocity = Vector2.zero;
+        _rigidbody.angularVelocity = 0;
+        
         Vector2 direction = Vector2.zero;
         
         if (Input.GetKey(KeyCode.W))
@@ -30,7 +33,13 @@ public class DuckMovement : MonoBehaviour
             direction += Vector2.right;
         
         var position = _rigidbody.position;
-        position += Time.fixedDeltaTime * 2 * direction;
+        position += Time.fixedDeltaTime * 2 * direction.normalized;
         _rigidbody.MovePosition(position);
+
+        if (position != lastUpdatePosition)
+        {
+            var rotation = position - lastUpdatePosition;
+            _rigidbody.SetRotation(Quaternion.LookRotation(Vector3.forward, rotation.normalized));
+        }
     }
 }

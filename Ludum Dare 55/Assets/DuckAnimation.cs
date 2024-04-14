@@ -13,15 +13,17 @@ public class DuckAnimation : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         var lastChangeOfSprite = 0f;
         var currentSprite = 0;
+        var lastPosition = transform.position;
         while (true)
         {
-            if (Time.time - lastChangeOfSprite > 0.1)
+            if (Time.time - lastChangeOfSprite > 0.1 && lastPosition != transform.position)
             {
                 currentSprite = (currentSprite + 1) % sprites.Length;
                 _renderer.sprite = sprites[currentSprite];
                 lastChangeOfSprite = Time.time;
             }
 
+            lastPosition = transform.position;
             yield return null;
         }
     }
