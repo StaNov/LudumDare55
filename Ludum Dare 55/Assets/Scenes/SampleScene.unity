@@ -13949,7 +13949,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "<size=50>Quack </size>\ninto the microphone \n<b>\"XXX\"</b> \nto summon
-    the ducklings.\n<size=20>Make sure it has enough volume set.</size>"
+    the ducklings.\n<size=24>Make sure it has enough volume set.</size>"
 --- !u!222 &1250346956
 CanvasRenderer:
   m_ObjectHideFlags: 0
