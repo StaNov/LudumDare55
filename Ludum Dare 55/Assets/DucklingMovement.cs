@@ -13,10 +13,12 @@ public class DucklingMovement : MonoBehaviour
     private float _angularSpeed;
     private bool _foundMom;
     private ScoreText _scoreText;
+    private DucklingSound _ducklingSound;
     
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _ducklingSound = GetComponent<DucklingSound>();
         _rigidbody.SetRotation(Random.Range(0f, 360f));
         _dadDuck = GameObject.Find("Duck");
         _momDuck = GameObject.Find("DuckMom");
@@ -53,5 +55,6 @@ public class DucklingMovement : MonoBehaviour
         var rotation = (toMomDuck ? _momDuck : _dadDuck).transform.position - _rigidbody.transform.position;
         _rigidbody.SetRotation(Quaternion.LookRotation (Vector3.forward, rotation.normalized));
         _currentSpeed = Math.Max(_currentSpeed, (_MaxSpeed - _MinSpeed) * intensity + _MinSpeed);
+        _ducklingSound.PlayChirp();
     }
 }
