@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DucklingFlow : MonoBehaviour
 {
+    public AudioSource audioSource;
+    
     private Rigidbody2D _rigidbody;
     private MusicPlayer _musicPlayer;
     private GameObject _gameOverPanel;
@@ -26,6 +28,7 @@ public class DucklingFlow : MonoBehaviour
             _musicPlayer.PlayLoss();
             duckMovement.enabled = false;
             _gameOverPanel.SetActive(true);
+            audioSource.Play();
         }
 
         var position = transform.position;

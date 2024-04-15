@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DucklingHit : MonoBehaviour
 {
+    public AudioSource audioSource;
+    
     private MusicPlayer _musicPlayer;
     private GameObject _gameOverPanel;
     public Sprite splashSprite;
@@ -30,6 +32,7 @@ public class DucklingHit : MonoBehaviour
             duckMovement.enabled = false;
             GameObject.Find("QuackField").SetActive(false);
             _musicPlayer.PlayLoss();
+            audioSource.Play();
             _gameOverPanel.SetActive(true);
         }
 
