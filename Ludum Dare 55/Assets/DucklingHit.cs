@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DucklingHit : MonoBehaviour
 {
     private MusicPlayer _musicPlayer;
+    private GameObject _gameOverPanel;
     public Sprite splashSprite;
 
     void Awake()
     {
         _musicPlayer = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
+        _gameOverPanel = GameObject.Find("GUI").transform.GetChild(1).gameObject;
     }
     
     void OnTriggerEnter2D(Collider2D other)
@@ -30,6 +30,7 @@ public class DucklingHit : MonoBehaviour
             duckMovement.enabled = false;
             GameObject.Find("QuackField").SetActive(false);
             _musicPlayer.PlayLoss();
+            _gameOverPanel.SetActive(true);
         }
 
         GetComponent<Rigidbody2D>().isKinematic = true;

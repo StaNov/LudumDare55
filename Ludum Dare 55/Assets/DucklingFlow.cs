@@ -6,11 +6,13 @@ public class DucklingFlow : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
     private MusicPlayer _musicPlayer;
+    private GameObject _gameOverPanel;
     
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _musicPlayer = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
+        _gameOverPanel = GameObject.Find("GUI").transform.GetChild(1).gameObject;
     }
 
     public void OnDucklingFlow()
@@ -25,6 +27,7 @@ public class DucklingFlow : MonoBehaviour
         {
             _musicPlayer.PlayLoss();
             duckMovement.enabled = false;
+            _gameOverPanel.SetActive(true);
         }
 
         var position = transform.position;
