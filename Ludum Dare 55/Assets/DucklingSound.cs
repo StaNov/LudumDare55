@@ -1,23 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DucklingSound : MonoBehaviour
 {
     public AudioClip[] chirps;
+    public AudioSource audioSource;
     
-    private AudioSource _audioSource;
-    
-    void Awake()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
-
     public void PlayChirp()
     {
-        if (_audioSource.isPlaying)
+        if (audioSource.isPlaying)
             return;
         
-        _audioSource.PlayOneShot(chirps[Random.Range(0, chirps.Length)]);
+        audioSource.PlayOneShot(chirps[Random.Range(0, chirps.Length)]);
     }
 }

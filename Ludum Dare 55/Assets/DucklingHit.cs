@@ -24,8 +24,11 @@ public class DucklingHit : MonoBehaviour
     {
         var ducklingMovement = GetComponent<DucklingMovement>();
         if (ducklingMovement != null)
+        {
             ducklingMovement.enabled = false;
-        
+            audioSource.Play();
+        }
+
         var duckMovement = GetComponent<DuckMovement>();
         if (duckMovement != null)
         {

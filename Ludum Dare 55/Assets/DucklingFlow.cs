@@ -21,6 +21,7 @@ public class DucklingFlow : MonoBehaviour
         if (ducklingMovement != null)
         {
             ducklingMovement.enabled = false;
+            audioSource.Play();
         }
         var duckMovement = GetComponent<DuckMovement>();
         if (duckMovement != null)
